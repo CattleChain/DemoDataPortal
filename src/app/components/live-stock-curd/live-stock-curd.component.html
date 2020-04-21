@@ -1,0 +1,159 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form class="example-form" [formGroup]="createDevice">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>Add New Live Stock Device</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Device Id</mat-label>
+                            <input matInput id="device_id" formControlName="device_id" [ngModel]="id">
+                            <button mat-button matSuffix color="primary" (click)="generateUUID()">Generate</button>
+                            <mat-error *ngIf="createDevice.controls['device_id'].hasError('required')">
+                                Asset Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>protocol</mat-label>
+                            <input matInput id="protocol" formControlName="protocol">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Entity Name</mat-label>
+                            <input matInput id="entity_name" formControlName="entity_name" [ngModel]="entity_name">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Entity Type</mat-label>
+                            <input matInput id="entity_type" formControlName="entity_type">
+                        </mat-form-field>
+                        <button mat-button matSuffix color="accent" (click)="addAttribute()">Add Attribute</button>
+                        <mat-divider></mat-divider>
+                        <div formArrayName="attributes" *ngFor="let attr of attributes.controls;">
+                            <ng-container [formGroup]="attr">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Object ID</mat-label>
+                                    <input matInput id="object_id" formControlName="object_id">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput id="name" formControlName="name">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Type</mat-label>
+                                    <input matInput id="type" formControlName="type">
+                                </mat-form-field>
+                            </ng-container>
+                          </div>
+                          <button mat-button matSuffix color="accent" (click)="addStaticAttribute()">Add Static Attribute</button>
+                        <mat-divider></mat-divider>
+                        <div formArrayName="attributes" *ngFor="let attr of static_attributes.controls;">
+                            <ng-container [formGroup]="attr">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput id="name" formControlName="name">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Type</mat-label>
+                                    <input matInput id="type" formControlName="type">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Value</mat-label>
+                                    <input matInput id="value" formControlName="value">
+                                </mat-form-field>
+                            </ng-container>
+                          </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="onCreate()">Create</button>
+                    </mat-card-actions>
+                    <br>
+                </mat-card>
+            </form>
+        </div>
+        <div class="col">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>List of Available Devices</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <div class="example-table-container">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <h3>List of All Devices </h3>
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="device_id">
+                  <th mat-header-cell *matHeaderCellDef> Device Id </th>
+                  <td mat-cell *matCellDef="let element" (click) = "openDialog(element)"> {{element.device_id}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="entity_name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.entity_name}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="entity_type">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.entity_type}} </td>
+                </ng-container>
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="transport">
+                  <th mat-header-cell *matHeaderCellDef> Transport </th>
+                  <td mat-cell *matCellDef="let element"> {{element.transport}} </td>
+                </ng-container>
+                <ng-container matColumnDef="protocol">
+                    <th mat-header-cell *matHeaderCellDef> Protocol </th>
+                    <td mat-cell *matCellDef="let element"> {{element.protocol}} </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              </div>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card *ngIf="isShow" class="example-card">
+            <mat-card-header>
+                <mat-card-title>device_id:   {{device.device_id}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>service:      {{device.service}}</p>
+                <mat-divider></mat-divider>
+                <p>entity_name:    {{device.entity_name}}</p>
+                <mat-divider></mat-divider>
+                <p>entity_type:    {{device.entity_type}}</p>
+                <mat-divider></mat-divider>
+                <p>transport:    {{device.transport}}</p>
+                <mat-divider></mat-divider>
+                <p>protocol:    {{device.protocol}}</p>
+                <mat-divider></mat-divider>
+                <div *ngFor= "let attr of device.attributes">
+                    <p>object_id : {{attr.object_id}} , name : {{attr.name}}, type : {{attr.type}}</p>
+                    <br>
+                </div>
+                <div *ngFor= "let attr of device.static_attributes">
+                    <p>name : {{attr.name}} , type : {{attr.type}}, value : {{attr.value}}</p>
+                    <br>
+                </div>
+                <button mat-raised-button color="primary" (click)="attachGenerator(device.device_id, device.attributes)">Start and Attach Device</button>               
+            </mat-card-content>
+        </mat-card>
+        </div>
+    </div>
+</div>

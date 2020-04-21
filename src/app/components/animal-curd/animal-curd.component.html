@@ -1,0 +1,225 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="white col">
+            <form class="example-form" [formGroup]="createAnimalIdentity" (ngSubmit)="onCreate()">
+                    <!-- <mat-card-header>
+                        <mat-card-title>Add New Animal</mat-card-title>
+                    </mat-card-header> -->
+                        <mat-divider></mat-divider>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Animal Id</mat-label>
+                            <input matInput id="id" formControlName="id" [ngModel]="id">
+                            <button mat-button matSuffix color="primary" (click)="generateUUID()">Generate</button>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Type</mat-label>
+                            <input matInput id="type" formControlName="type" [readonly]="true" [ngModel]="type">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Species</mat-label>
+                            <select matNativeControl required id="species" formControlName="species">
+                                <option value="cow">Cow</option>
+                                <option value="goat">Goat</option>
+                                <option value="horse">Horse</option>
+                                <option value="pig">Pig</option>
+                                <option value="sheep">Sheep</option>
+                            </select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Legal ID (Passport No)</mat-label>
+                            <input matInput id="legalId" formControlName="legalId">
+                        </mat-form-field>
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-label>Choose a date</mat-label>
+                                        <input matInput [matDatepicker]="picker" readonly id="birthdate"
+                                            formControlName="birthdate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker [for]="picker" #picker [appendToInput]="true"></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-label>Choose a Time</mat-label>
+                                        <input matInput [ngxTimepicker]="appendedToInput" readonly id="birthtime"
+                                            formControlName="birthtime">
+                                        <ngx-material-timepicker #appendedToInput [appendToInput]="true">
+                                        </ngx-material-timepicker>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Sex</mat-label>
+                            <select matNativeControl required id="sex" formControlName="sex">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Breed</mat-label>
+                            <input matInput id="breed" formControlName="breed">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Calved By</mat-label>
+                            <input matInput id="calvedBy" formControlName="calvedBy">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Sired By</mat-label>
+                            <input matInput id="siredBy" formControlName="siredBy">
+                        </mat-form-field>
+                        <table class="example-full-width" cellspacing="0">
+                            <mat-label>Location</mat-label>
+                            <tr>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-label>Latitude</mat-label>
+                                        <input matInput id="latitude" formControlName="latitude">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-label>Longitude</mat-label>
+                                        <input matInput id="longitude" formControlName="longitude">
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Weight</mat-label>
+                            <input matInput id="weight" formControlName="weight">
+                            <span matSuffix>Kg</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Fed With</mat-label>
+                            <input matInput id="fedWith" formControlName="fedWith">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Owner</mat-label>
+                            <input matInput id="ownedBy" formControlName="ownedBy">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Phenological Condition</mat-label>
+                            <select matNativeControl required id="phenologicalCondition"
+                                formControlName="phenologicalCondition">
+                                <option value="lactatingBaby">Lactating Baby</option>
+                                <option value="grazingBaby">Grazing Baby</option>
+                                <option value="maleAdult">Male Adult</option>
+                                <option value="femaleAdult">Female Adult</option>
+                                <option value="maleYoung">Male Young</option>
+                                <option value="femaleYoung">Female Young</option>
+                            </select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Reproductive Condition</mat-label>
+                            <select matNativeControl required id="reproductiveCondition"
+                                formControlName="reproductiveCondition">
+                                <option value="no_status">No Status</option>
+                                <option value="inactive">In Active</option>
+                                <option value="active">Active</option>
+                                <option value="inHeat">In Heat</option>
+                                <option value="inCalf">In Calf</option>
+                            </select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Health Condition</mat-label>
+                            <select matNativeControl required id="healthCondition" formControlName="healthCondition">
+                                <option value="healthy">Healthy</option>
+                                <option value="sick">Sick</option>
+                                <option value="inTreatment">In Treatment</option>
+                            </select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Welfare Condition</mat-label>
+                            <select matNativeControl required id="welfareCondition" formControlName="welfareCondition">
+                                <option value="issue">Issue</option>
+                                <option value="adequate">Adequate</option>
+                            </select>
+                        </mat-form-field>
+                    <button mat-raised-button color="primary" cdkFocusInitial>Create</button>
+            </form>
+        </div>
+        <mat-divider vertical></mat-divider>
+        <div class="col">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>List of Available Animals</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <div class="example-table-container">
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                            <h3>List of All Animals </h3>
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> Id </th>
+                                <td mat-cell *matCellDef="let element" (click) = "openDialog(element)"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="legalId">
+                                <th mat-header-cell *matHeaderCellDef> Legal Id</th>
+                                <td mat-cell *matCellDef="let element"> {{element.legalId}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="species">
+                                <th mat-header-cell *matHeaderCellDef> Species </th>
+                                <td mat-cell *matCellDef="let element"> {{element.species}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card *ngIf="isShow" class="example-card">
+                <mat-card-header>
+                    <mat-card-title>ID: {{animal.id}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Type:    {{animal.type}}</p>
+                    <mat-divider></mat-divider>
+                    <p>breed:   {{animal.breed}}</p>
+                    <mat-divider></mat-divider>
+                    <p>birthdate:   {{animal.birthdate}}</p>
+                    <mat-divider></mat-divider>
+                    <p>Type:    {{animal.type}}</p>
+                    <mat-divider></mat-divider>
+                    <p>calvedBy:    {{animal.calvedBy}}</p>
+                    <mat-divider></mat-divider>
+                    <p>fedWith:     {{animal.fedWith}}</p>
+                    <mat-divider></mat-divider>
+                    <p>healthCondition:     {{animal.healthCondition}}</p>
+                    <mat-divider></mat-divider>
+                    <p>legalId:     {{animal.legalId}}</p>
+                    <mat-divider></mat-divider>
+                    <p>phenologicalCondition:   {{animal.phenologicalCondition}}</p>
+                    <mat-divider></mat-divider>
+                    <p>sex:     {{animal.sex}}</p>
+                    <mat-divider></mat-divider>
+                    <p>siredBy:     {{animal.siredBy}}</p>
+                    <mat-divider></mat-divider>
+                    <p>species:     {{animal.species}}</p>
+                    <mat-divider></mat-divider>
+                    <p>weight:  {{animal.weight}}</p>
+                    <mat-divider></mat-divider>
+                    <p>welfareCondition:    {{animal.welfareCondition}}</p>
+                    <mat-divider></mat-divider>
+                    <p>location:    {{animal.location.coordinates}}</p>
+                    <mat-divider></mat-divider>
+                    <p>locatedAt:   {{animal.locatedAt}}</p>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

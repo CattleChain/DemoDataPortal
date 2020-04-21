@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="alert alert-warning" role="alert">
+    <h2>There isn't any Update Operation implemented yet !!!</h2>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Global States</mat-card-title>
+        <mat-card-content>
+          <div class="alert alert-primary" role="alert">
+            <h3>Fiware-Serice : 'cattlechain' </h3> 
+          <h3>Fiware-ServicePath : '/CattleChainService' </h3>
+          </div>
+         
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>IoT Agent Status</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="iotAgentStatus; else noStatus" class="alert alert-success" role="alert">
+            <p>libVersion : {{iotAgentStatus.libVersion}}</p>
+            <p>port: {{iotAgentStatus.port}}</p>
+            <p>baseRoot: {{iotAgentStatus.baseRoot}}</p>
+            <p>version: {{iotAgentStatus.version}}</p>
+            <h3> Accuator Port : 7896</h3>
+          </div>
+          <ng-template #noStatus>
+            <div class="alert alert-danger" role="alert">
+             <p>Error: Not Working</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card >
+        <mat-card-title>IOT Agent Sevice Status</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="iotAgentServiceGroup.length>0; else noIot" class="alert alert-success" role="alert">
+            <p>id : {{iotAgentServiceGroup[0]._id}}</p>
+            <p>resource: {{iotAgentServiceGroup[0].resource}}</p>
+            <p>apikey: {{iotAgentServiceGroup[0].apikey}}</p>
+            <p>service: {{iotAgentServiceGroup[0].service}}</p>
+            <p>subservice: {{iotAgentServiceGroup[0].subservice}}</p>
+            <p>entity_type: {{iotAgentServiceGroup[0].entity_type}}</p>
+          </div>
+          <ng-template #noIot>
+            <div class="alert alert-danger" role="alert">
+             <p>No Service Exist</p>
+             <button type="button" class="btn btn-primary" (click)="createService()">Create Demo Service</button>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Context Broker</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="contextStatus; else noBroker" class="alert alert-success" role="alert">
+            <p>version : {{contextStatus.version}}</p>
+            <p>uptime : {{contextStatus.uptime}}</p>
+            <p>git_hash : {{contextStatus.git_hash}}</p>
+            <p>compile_time : {{contextStatus.compile_time}}</p>
+            <p>compiled_by : {{contextStatus.compiled_by}}</p>
+            <p>compiled_in : {{contextStatus.compiled_in}}</p>
+            <p>release_date : {{contextStatus.release_date}}</p>
+            <p>doc : {{contextStatus.doc}}</p>
+          </div>
+          <ng-template #noBroker>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Cygnus with Postgres</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="cygnusStatus; else noCygnus" class="alert alert-success" role="alert">
+            <p>success : {{cygnusStatus.success}}</p>
+            <p>version : {{cygnusStatus.version}}</p>
+          </div>
+          <ng-template #noCygnus>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-4">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>STH Comet</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="cometStatus; else noComet" class="alert alert-success" role="alert">
+            <p>version : {{cometStatus}}</p>
+          </div>
+          <ng-template #noComet>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

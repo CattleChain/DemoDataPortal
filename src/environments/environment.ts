@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  IOTAgentJSON: "http://localhost:4041/iot",
+  IOTAgentProvison : "http://localhost:7896/iot",
+  ContextBroker: "http://localhost:1026",
+  cygus: "http://localhost:5080",
+  sthComet: "http://localhost:8666"
 };
 
 /*
