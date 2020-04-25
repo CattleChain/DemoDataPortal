@@ -151,6 +151,11 @@
                     <p>name : {{attr.name}} , type : {{attr.type}}, value : {{attr.value}}</p>
                     <br>
                 </div>
+                <br>
+                <mat-label>Enter Animal Legal ID (Blockchain Account identification purpose)</mat-label>
+                <br>
+                <input required [(ngModel)]="legalId"> <br>
+                <br>
                 <button mat-raised-button color="primary" (click)="attachGenerator(device.device_id, device.attributes)">Start and Attach Device</button>               
             </mat-card-content>
         </mat-card>

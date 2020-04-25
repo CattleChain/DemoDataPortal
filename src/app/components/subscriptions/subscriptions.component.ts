@@ -33,8 +33,7 @@ export class SubscriptionsComponent implements OnInit {
 
   addEntity() {
     const attr = new FormGroup({
-      idPattern: new FormControl(''),
-      type: new FormControl('')
+      idPattern: new FormControl('')
   });
   this.entities.push(attr);
   }

@@ -29,5 +29,6 @@ export interface AnimalModel {
     species: string;
     weight: any;
     welfareCondition: string;
+    batchId: string;
 }
 

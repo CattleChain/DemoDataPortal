@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, forwardRef, Inject } from '@angular/core';
 import { ContextBrokerService } from '../services/context-broker.service';
+import { TpClientService } from '../services/cattlechain-tp-client.service';
 import * as uuid from 'uuid';
 import { FormBuilder, Validators, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AnimalModel } from 'src/app/models/animalModel';
@@ -18,16 +19,16 @@ export class AnimalCURDComponent implements OnInit {
   createAnimalIdentity;
   public id;
   public type;
-  isShow:Boolean = false;
+  isShow: Boolean = false;
   animals: AnimalModel[];
   animal: AnimalModel;
   displayedColumns: string[] = ['id', 'legalId', 'species'];
-  dataSource:any;
-  template:String;
+  dataSource: any;
+  template: String;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
-  constructor(private contextService: ContextBrokerService, private formBuilder: FormBuilder,) {
+
+  constructor(private contextService: ContextBrokerService, private tpClient: TpClientService, private formBuilder: FormBuilder, ) {
     this.createAnimalIdentity = this.formBuilder.group({
       id: new FormControl(),
       type: [null, Validators.required],
@@ -99,8 +100,32 @@ export class AnimalCURDComponent implements OnInit {
       fedWith: { type: 'Relationship', value: this.createAnimalIdentity.value.fedWith },
       welfareCondition: { value: this.createAnimalIdentity.value.welfareCondition }
     };
-    this.contextService.create(body).then((animal) => {
-      alert('new animal added' + JSON.stringify(animal));
+
+    let tpClientBody = {
+      "id": this.createAnimalIdentity.value.id,
+      "type": this.createAnimalIdentity.value.type,
+      "breed": this.createAnimalIdentity.value.breed,
+      "sex": this.createAnimalIdentity.value.sex,
+      "legalId": this.createAnimalIdentity.value.legalId,
+      "species": this.createAnimalIdentity.value.species,
+      "birthdate": this.createAnimalIdentity.value.birthdate,
+      "calvedBy": this.createAnimalIdentity.value.calvedBy,
+      "siredBy": this.createAnimalIdentity.value.siredBy,
+      "weight": this.createAnimalIdentity.value.weight,
+      "ownedBy": this.createAnimalIdentity.value.ownedBy,
+      "phenologicalCondition": this.createAnimalIdentity.value.phenologicalCondition,
+      "healthCondition": this.createAnimalIdentity.value.healthCondition,
+      "fedWith": this.createAnimalIdentity.value.fedWith,
+      "welfareCondition": this.createAnimalIdentity.value.welfareCondition,
+      "location": { "type": "point", "coordinates": [this.createAnimalIdentity.value.latitude, this.createAnimalIdentity.value.longitude]}
+    };
+
+    this.tpClient.createAnimalIdentity(tpClientBody).then((res) => {
+      console.log(res['success']['link']);
+      body['batchId'] = {value: res['success']['link'].toString().replace('http://rest-api:8008/batch_statuses?id=', '')}
+      return this.contextService.create(body);
+    }).then((res) => {
+      alert('animal created');
       this.ngOnInit();
     }).catch((error) => {
       alert('Error : ' + JSON.stringify(error));

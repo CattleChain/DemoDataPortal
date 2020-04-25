@@ -16,7 +16,6 @@ import { FarmCURDComponent } from './components/farm-curd/farm-curd.component';
 import { LiveStockCURDComponent } from './components/live-stock-curd/live-stock-curd.component';
 import { LiveStockEventsComponent } from './components/live-stock-events/live-stock-events.component';
 import { SupplyChainComponent } from './components/supply-chain/supply-chain.component';
-import { BlockchainTraceComponent } from './components/blockchain-trace/blockchain-trace.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -35,7 +34,6 @@ import { ChartsModule } from 'ng2-charts';
     LiveStockCURDComponent,
     LiveStockEventsComponent,
     SupplyChainComponent,
-    BlockchainTraceComponent,
     OffChainDBComponent,
     SubscriptionsComponent
   ],

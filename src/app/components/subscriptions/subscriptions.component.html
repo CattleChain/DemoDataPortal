@@ -2,6 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
+            <h1>Change blockchain actions to subscriptions and update entities</h1>
             <mat-card class="example-card">
             <form class="example-form" [formGroup]="createSubscription">
                     <mat-card-header>
@@ -25,10 +26,6 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>idPattern</mat-label>
                                     <input matInput id="idPattern" formControlName="idPattern">
-                                </mat-form-field>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Type</mat-label>
-                                    <input matInput id="type" formControlName="type">
                                 </mat-form-field>
                             </ng-container>
                           </div>
@@ -76,9 +73,6 @@
                                         <div class="bg-gray col">
                                             <div class="row">
                                                 idPattern: {{data.idPattern}}
-                                            </div>
-                                            <div class="row">
-                                                type: {{data.type}}
                                             </div>
                                         </div>
                                     </div>

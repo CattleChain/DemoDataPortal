@@ -8,7 +8,10 @@ export const environment = {
   IOTAgentProvison : "http://localhost:7896/iot",
   ContextBroker: "http://localhost:1026",
   cygus: "http://localhost:5080",
-  sthComet: "http://localhost:8666"
+  sthComet: "http://localhost:8666",
+  sawtoothREST: "http://localhost:8008",
+  sawtoothExplorer: "http://localhost:4100",
+  tpClient: "http://localhost:3000",
 };
 
 /*

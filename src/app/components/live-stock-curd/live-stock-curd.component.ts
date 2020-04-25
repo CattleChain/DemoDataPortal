@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IoTAgentServiceService } from '../services/iot-agent-service.service';
+import { TpClientService } from '../services/cattlechain-tp-client.service';
 import * as uuid from 'uuid';
 import { FormBuilder, Validators, FormControl, FormArray, FormGroup } from '@angular/forms';
 import { DeviceModel, Device } from 'src/app/models/deviceModel';
@@ -26,10 +27,12 @@ export class LiveStockCURDComponent implements OnInit {
   displayedColumns: string[] = ['device_id', 'entity_type', 'entity_name', 'transport', 'protocol'];
   dataSource;
   public entity_name;
+  public legalId;
+  isStarted: boolean;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private iotAgentService: IoTAgentServiceService, private formBuilder: FormBuilder, ) {
+  constructor(private iotAgentService: IoTAgentServiceService, private formBuilder: FormBuilder, private tpClient: TpClientService ) {
     this.createDevice = this.formBuilder.group({
       device_id: new FormControl(),
       protocol: [null, Validators.required],
@@ -39,8 +42,8 @@ export class LiveStockCURDComponent implements OnInit {
   }
 
   attachGenerator(device_id, atts) {
-    console.log('attachGenerator', device_id);
-    const iotDeviceGen = new IotDataGenerator(this.iotAgentService, device_id, atts);
+    console.log('attachGenerator', device_id, this.legalId);
+    const iotDeviceGen = new IotDataGenerator(this.iotAgentService, this.tpClient, device_id, this.legalId, atts);
     iotDeviceGen.initialize();
   }
 

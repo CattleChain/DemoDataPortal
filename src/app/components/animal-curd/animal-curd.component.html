@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="white col">
-            <form class="example-form" [formGroup]="createAnimalIdentity" (ngSubmit)="onCreate()">
+            <form class="example-form" [formGroup]="createAnimalIdentity">
                     <!-- <mat-card-header>
                         <mat-card-title>Add New Animal</mat-card-title>
                     </mat-card-header> -->
@@ -145,7 +145,7 @@
                                 <option value="adequate">Adequate</option>
                             </select>
                         </mat-form-field>
-                    <button mat-raised-button color="primary" cdkFocusInitial>Create</button>
+                    <button mat-raised-button color="primary" (click)="onCreate()">Create</button>
             </form>
         </div>
         <mat-divider vertical></mat-divider>
@@ -218,6 +218,9 @@
                     <mat-divider></mat-divider>
                     <p>locatedAt:   {{animal.locatedAt}}</p>
                     <mat-divider></mat-divider>
+                    <p>Blockchain Batch ID:   {{animal.batchId}}</p>
+                    <mat-divider></mat-divider>
+                    <p>Blockchain Explorer Trace: <a target="_blank" href="http://localhost:4100/batches/{{animal.batchId}}">Link</a> </p>
                 </mat-card-content>
             </mat-card>
         </div>

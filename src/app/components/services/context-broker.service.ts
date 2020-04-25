@@ -18,6 +18,8 @@ export class ContextBrokerService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'fiware-service': 'cattlechain',
+        'fiware-servicepath': '/CattleChainService'
       })
     };
   }
@@ -105,16 +107,28 @@ export class ContextBrokerService {
   }
 
   getAllSubscription() {
+    let header = {
+      headers: new HttpHeaders({
+        'fiware-service': 'cattlechain',
+        'fiware-servicepath': '/CattleChainService'
+      })
+    };
     return new Promise((resolve, reject) => {
-      this.http.get(this.Endpoint + '/v2/subscriptions' ).subscribe(response => {
+      this.http.get(this.Endpoint + '/v2/subscriptions/', header ).subscribe(response => {
         resolve(response)
       }, error => reject(error));
     })
   }
 
   getSubscriptionById(id) {
+    let header = {
+      headers: new HttpHeaders({
+        'fiware-service': 'cattlechain',
+        'fiware-servicepath': '/CattleChainService'
+      })
+    };
     return new Promise((resolve, reject) => {
-      this.http.get(this.Endpoint + '/v2/subscriptions/' + id).subscribe(response => {
+      this.http.get(this.Endpoint + '/v2/subscriptions/' + id, header).subscribe(response => {
         resolve(response)
       }, error => {
         reject(error)
@@ -132,7 +146,7 @@ export class ContextBrokerService {
 
   deleteSubscriptionById(id) {
     return new Promise((resolve, reject) => {
-      this.http.delete(this.Endpoint + '/v2/subscriptions/' + id).subscribe(response => {
+      this.http.delete(this.Endpoint + '/v2/subscriptions/' + id, this.httpOptions).subscribe(response => {
         resolve(response)
       }, error => reject(error));
     })

@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { IoTAgentServiceService } from '../services/iot-agent-service.service';
 import { ContextBrokerService } from '../services/context-broker.service';
+import { SawtoothRESTService } from '../services/sawtooth-rest.service';
+import { TpClientService } from '../services/cattlechain-tp-client.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: [IoTAgentServiceService, ContextBrokerService],
+  providers: [IoTAgentServiceService, ContextBrokerService, SawtoothRESTService, TpClientService],
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private iotAgent: IoTAgentServiceService, private context: ContextBrokerService) { }
+  constructor(private iotAgent: IoTAgentServiceService, private context: ContextBrokerService, private sawtoothREST: SawtoothRESTService, private tpClient: TpClientService) { }
   iotAgentStatus: IotAgentStatus;
   iotAgentServiceGroup: IotAgentServiceGroup[];
   contextStatus : ContextStatus;
   cygnusStatus: CygnusStatus;
   cometStatus : any;
+  sawtoothStatus: SawtoothRESTStatus;
+  sawtoothExplorerStatus: any;
+  count = 0;
+  tpClientStatus: any;
 
   ngOnInit(): void {
     this.iotAgent.getIotAgentStatus().then((res) => {
@@ -23,6 +29,7 @@ export class DashboardComponent implements OnInit {
     });
     this.iotAgent.getIotAgentSevice().then((res) => {
       this.iotAgentServiceGroup = <IotAgentServiceGroup[]>res['services'];
+      this.count = this.iotAgentServiceGroup.length;
     });
     this.context.status().then((res) => {
       this.contextStatus = <ContextStatus>res['orion'];
@@ -32,6 +39,15 @@ export class DashboardComponent implements OnInit {
     })
     this.context.getCometStatus().then((res) => {
       this.cometStatus = res['version'];
+    });
+    this.sawtoothREST.getStatus().then((res) => {
+      this.sawtoothStatus = <SawtoothRESTStatus>res;
+    });
+    this.sawtoothREST.getSawtoothExplorerStatus().then((res) => {
+      this.sawtoothExplorerStatus = res;
+    });
+    this.tpClient.getTpStatus().then((res) => {
+      this.tpClientStatus = res['success'];
     });
   }
 
@@ -53,6 +69,7 @@ export class DashboardComponent implements OnInit {
 
   }
 }
+
 
 export interface IotAgentStatus {
   libVersion: string,
@@ -87,3 +104,14 @@ export interface ContextStatus {
   release_date: string,
   doc: string
 }
+
+export interface SawtoothRESTStatus {
+  data: Data;
+  link: string;
+}
+
+export interface Data {
+  endpoint: string;
+  peers: any[];
+}
+

@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="alert alert-warning" role="alert">
-    <h2>There isn't any Update Operation implemented yet !!!</h2>
+    <h2>There isn't any Auth and Update Operation implemented yet !!!</h2>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
         <mat-card-title>Global States</mat-card-title>
@@ -12,11 +12,10 @@
             <h3>Fiware-Serice : 'cattlechain' </h3> 
           <h3>Fiware-ServicePath : '/CattleChainService' </h3>
           </div>
-         
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
         <mat-card-title>IoT Agent Status</mat-card-title>
@@ -36,12 +35,12 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card >
         <mat-card-title>IOT Agent Sevice Status</mat-card-title>
         <mat-card-content>
-          <div *ngIf="iotAgentServiceGroup.length>0; else noIot" class="alert alert-success" role="alert">
+          <div *ngIf="count; else noIot" class="alert alert-success" role="alert">
             <p>id : {{iotAgentServiceGroup[0]._id}}</p>
             <p>resource: {{iotAgentServiceGroup[0].resource}}</p>
             <p>apikey: {{iotAgentServiceGroup[0].apikey}}</p>
@@ -58,7 +57,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
         <mat-card-title>Context Broker</mat-card-title>
@@ -66,9 +65,7 @@
           <div *ngIf="contextStatus; else noBroker" class="alert alert-success" role="alert">
             <p>version : {{contextStatus.version}}</p>
             <p>uptime : {{contextStatus.uptime}}</p>
-            <p>git_hash : {{contextStatus.git_hash}}</p>
             <p>compile_time : {{contextStatus.compile_time}}</p>
-            <p>compiled_by : {{contextStatus.compiled_by}}</p>
             <p>compiled_in : {{contextStatus.compiled_in}}</p>
             <p>release_date : {{contextStatus.release_date}}</p>
             <p>doc : {{contextStatus.doc}}</p>
@@ -81,10 +78,10 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
-        <mat-card-title>Cygnus with Postgres</mat-card-title>
+        <mat-card-title>Cygnus (mongo)</mat-card-title>
         <mat-card-content>
           <div *ngIf="cygnusStatus; else noCygnus" class="alert alert-success" role="alert">
             <p>success : {{cygnusStatus.success}}</p>
@@ -99,7 +96,7 @@
       </mat-card>
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
         <mat-card-title>STH Comet</mat-card-title>
@@ -115,5 +112,129 @@
         </mat-card-content>
       </mat-card>
     </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Sawtooth Validator</mat-card-title>
+        <mat-card-content>
+          <div  class="alert alert-success" role="alert">
+            <p>Validator Connection : tcp://localhost:4004</p>
+          </div>
+          <ng-template #noComet>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Sawtooth REST API</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="sawtoothStatus; else noSawtooth" class="alert alert-success" role="alert">
+            <p>version : {{sawtoothStatus.data.endpoint}}</p>
+            <a target="_blank" href="http://localhost:80">Swagger Client : http://localhost:80</a>
+          </div>
+          <ng-template #noSawtooth>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Sawtooth Blockchain Explorer</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="sawtoothExplorerStatus; else noExplorer" class="alert alert-success" role="alert">
+            <p>status : {{sawtoothExplorerStatus}}</p>
+            <p><a target="_blank" href="http://localhost:4100">http://localhost:4100</a> </p>
+          </div>
+          <ng-template #noExplorer>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Cattlechain Protos</mat-card-title>
+        <mat-card-content>
+          <div class="alert alert-info" role="alert">
+            <h3>Cattlechain Protobufs</h3> 
+           <a target="_blank" href="https://github.com/singhhp1069/FIWARE_Cattlechain_Protos">https://github.com/singhhp1069/FIWARE_Cattlechain_Protos</a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>CattleChain Transaction Processor (Smart Contract)</mat-card-title>
+        <mat-card-content>
+          <div class="alert alert-info" role="alert">
+            <h3>Attached to Validator</h3> 
+           <a target="_blank" href="https://github.com/singhhp1069/FIWARE_Cattlechain_Sawtooth_tp">https://github.com/singhhp1069/FIWARE_Cattlechain_Sawtooth_tp</a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Cattlechain Transaction Processor Client</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="tpClientStatus; else noTpClient" class="alert alert-success" role="alert">
+            <p>status : {{tpClientStatus}}</p>
+          </div>
+          <ng-template #noTpClient>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Ledger Sync Service</mat-card-title>
+        <mat-card-content>
+          <div class="alert alert-success" role="alert">
+            <p>Status : working</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div> 
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>ML Service</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="cometStatus; else noML" class="alert alert-success" role="alert">
+            <p>version : {{cometStatus}}</p>
+          </div>
+          <ng-template #noML>
+            <div class="alert alert-danger" role="alert">
+             <p>Service Error or doesn't exist</p>
+            </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div> 
   </div>
 </div>

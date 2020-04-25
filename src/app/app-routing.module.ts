@@ -8,7 +8,6 @@ import { LiveStockEventsComponent } from './components/live-stock-events/live-st
 import { OffChainDBComponent } from './components/off-chain-db/off-chain-db.component';
 import { SupplyChainComponent } from './components/supply-chain/supply-chain.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
-import { BlockchainTraceComponent } from './components/blockchain-trace/blockchain-trace.component';
 
 
 const routes: Routes = [
@@ -41,20 +40,14 @@ const routes: Routes = [
     component: SupplyChainComponent
   },
   {
-    path: 'blockchain',
-    component: BlockchainTraceComponent
-  },
-  {
     path: 'offchaindb',
     component: OffChainDBComponent
-  }
-  
-  
-  // {
-  //   path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full'
-  // },
+  },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
   // {path: '**', component: PageNotFoundComponent}
 ];
 
