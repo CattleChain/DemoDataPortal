@@ -99,16 +99,40 @@
     <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
-        <mat-card-title>STH Comet</mat-card-title>
+        <mat-card-title>Quantum Leap</mat-card-title>
         <mat-card-content>
-          <div *ngIf="cometStatus; else noComet" class="alert alert-success" role="alert">
-            <p>version : {{cometStatus}}</p>
+          <div *ngIf="quantumLeapStatus; else noComet" class="alert alert-success" role="alert">
+            <p>version : {{quantumLeapStatus}}</p>
           </div>
           <ng-template #noComet>
             <div class="alert alert-danger" role="alert">
              <p>Service Error or doesn't exist</p>
             </div>
           </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>Grafana Dashboard</mat-card-title>
+        <mat-card-content>
+          <div  class="alert alert-success" role="alert">
+            <a target="_blank" href="http://localhost:3003/d/bUvI3CqZz/cattlchain-demo?orgId=1">Grafana Client : http://localhost:3003</a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-3">
+      <mat-divider></mat-divider>
+      <mat-card>
+        <mat-card-title>CrateDB</mat-card-title>
+        <mat-card-content>
+          <div  class="alert alert-success" role="alert">
+            <a target="_blank" href="http://localhost:4200/#!/">CrateDB Client : http://localhost:4200</a>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
@@ -133,17 +157,11 @@
     <div class="col-3">
       <mat-divider></mat-divider>
       <mat-card>
-        <mat-card-title>Sawtooth REST API</mat-card-title>
+        <mat-card-title>Sawtooth REST API Specification</mat-card-title>
         <mat-card-content>
-          <div *ngIf="sawtoothStatus; else noSawtooth" class="alert alert-success" role="alert">
-            <p>version : {{sawtoothStatus.data.endpoint}}</p>
-            <a target="_blank" href="http://localhost:80">Swagger Client : http://localhost:80</a>
+          <div class="alert alert-success" role="alert">
+            <a target="_blank" href="http://localhost:8029">Swagger Client : http://localhost:8029</a>
           </div>
-          <ng-template #noSawtooth>
-            <div class="alert alert-danger" role="alert">
-             <p>Service Error or doesn't exist</p>
-            </div>
-          </ng-template>
         </mat-card-content>
       </mat-card>
     </div>
@@ -216,23 +234,6 @@
           <div class="alert alert-success" role="alert">
             <p>Status : working</p>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div> 
-
-    <div class="col-3">
-      <mat-divider></mat-divider>
-      <mat-card>
-        <mat-card-title>ML Service</mat-card-title>
-        <mat-card-content>
-          <div *ngIf="cometStatus; else noML" class="alert alert-success" role="alert">
-            <p>version : {{cometStatus}}</p>
-          </div>
-          <ng-template #noML>
-            <div class="alert alert-danger" role="alert">
-             <p>Service Error or doesn't exist</p>
-            </div>
-          </ng-template>
         </mat-card-content>
       </mat-card>
     </div> 

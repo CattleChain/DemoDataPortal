@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IoTAgentServiceService } from '../services/iot-agent-service.service';
 import { TpClientService } from '../services/cattlechain-tp-client.service';
-import * as uuid from 'uuid';
 import { FormBuilder, Validators, FormControl, FormArray, FormGroup } from '@angular/forms';
 import { DeviceModel, Device } from 'src/app/models/deviceModel';
 import { MatPaginator } from '@angular/material/paginator';
@@ -45,6 +44,7 @@ export class LiveStockCURDComponent implements OnInit {
     console.log('attachGenerator', device_id, this.legalId);
     const iotDeviceGen = new IotDataGenerator(this.iotAgentService, this.tpClient, device_id, this.legalId, atts);
     iotDeviceGen.initialize();
+    this.isStarted = true;
   }
 
   addAttribute() {
@@ -72,6 +72,7 @@ export class LiveStockCURDComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = '';
+    this.isStarted = false;
     this.iotAgentService.getAllDevice().then((res) => {
       console.log(res);
       this.devices = <DeviceModel>res;
@@ -81,10 +82,12 @@ export class LiveStockCURDComponent implements OnInit {
     })
     this.dataSource.paginator = this.paginator;
   }
-
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
   generateUUID() {
-    var id = uuid.v4();
-    this.entity_name = 'urn:ngsi-ld:Device:'+ id;
+    var id = 'Device:'+this.getRandomInt(1,999).toString();
+    this.entity_name = 'urn:ngsi-ld:'+ id;
     this.id =  id;
   }
 

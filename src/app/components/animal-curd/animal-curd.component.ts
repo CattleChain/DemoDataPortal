@@ -57,7 +57,7 @@ export class AnimalCURDComponent implements OnInit {
     this.id = '';
     this.type = 'Animal';
     this.contextService.query('?type=Animal&options=keyValues').then((res) => {
-      console.log(res);
+      console.log(JSON.stringify(res));
       this.animals = <AnimalModel[]>res;
       this.dataSource = new MatTableDataSource<AnimalModel>(this.animals);
       this.dataSource.paginator = this.paginator;
@@ -125,6 +125,7 @@ export class AnimalCURDComponent implements OnInit {
       body['batchId'] = {value: res['success']['link'].toString().replace('http://rest-api:8008/batch_statuses?id=', '')}
       return this.contextService.create(body);
     }).then((res) => {
+      console.log('res', res);
       alert('animal created');
       this.ngOnInit();
     }).catch((error) => {

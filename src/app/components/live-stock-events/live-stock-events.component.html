@@ -1,6 +1,16 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-4">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Device ID</mat-label>
+                <input matInput [(ngModel)]="device" placeholder="device">
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="getData()">Get Data</button>
+              <button mat-raised-button color="warning" (click)="ngOnInit()">Reset</button>
+        </div>
+    </div>
+    <div *ngIf="show" class="row">
+        <div class="col-8">
             <div class="chart-wrapper">
                 <canvas baseChart 
                     [datasets]="lineChartData" 
@@ -13,55 +23,26 @@
                 </canvas>
             </div>
         </div>
-
         <div class="col-4">
-            <div class="chart-wrapper">
-                <canvas baseChart 
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [legend]="barChartLegend"
-                [chartType]="barChartType">
-              </canvas>
-            </div>
+            <h3>Blockchain Proofs</h3>
+            <mat-list>
+                <div *ngFor="let proof of proofSet">
+                    <p>timestamp: {{proof.timestamp}}</p>
+                    <mat-list-item style="font-size: 10px;" ><a target="_blank" href="{{proof.link}}">{{proof.batchId}}</a></mat-list-item>
+                </div>
+              </mat-list>
         </div>
+    </div>
+    <div *ngIf="show" class="row">
+        <div class="col-8">
+            <mat-list>
+                <div *ngFor="let proof of mlStatus">
+                    <p>timestamp: {{proof.timestamp}}</p>
+                    <mat-list-item *ngIf="proof.welfareCondition == 'Adequate'" style="font-size: 14px; color:blue;"> <p> temprature : {{proof.temprature}}, activity: {{proof.activity}}, rest_time: {{proof.rest_time}}, welfareCondition: {{proof.welfareCondition}} </p></mat-list-item>
+                    <mat-list-item *ngIf="proof.welfareCondition == 'Issue'" style="font-size: 14px; color:red;"> <p> temprature : {{proof.temprature}}, activity: {{proof.activity}}, rest_time: {{proof.rest_time}}, welfareCondition: {{proof.welfareCondition}} </p></mat-list-item>
+                </div>
+              </mat-list>
 
-        <div class="col-4">
-            <div class="chart-wrapper">
-                <canvas baseChart 
-                [data]="pieChartData" 
-                [labels]="pieChartLabels" 
-                [chartType]="pieChartType"
-                [options]="pieChartOptions"
-                [plugins]="pieChartPlugins"
-                [legend]="pieChartLegend">
-              </canvas>
-            </div>
-        </div>
-        <div class="col-2">
-        </div>
-        <div class="col-6">
-            <div class="chart-wrapper">
-                <canvas baseChart
-                [datasets]="bubbleChartData"
-                [options]="bubbleChartOptions"
-                [colors]="lineChartColors"
-                [legend]="bubbleChartLegend"
-                [chartType]="bubbleChartType">
-              </canvas>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="chart-wrapper">
-                <canvas baseChart
-                [datasets]="radarChartData"
-                [options]="radarChartOptions"
-                [labels]="radarChartLabels"
-                [chartType]="radarChartType">
-              </canvas>
-            </div>
         </div>
     </div>
 </div>

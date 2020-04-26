@@ -8,13 +8,13 @@ import { environment } from '../../../environments/environment';
 export class ContextBrokerService {
   private Endpoint = '';
   private cygnus = '';
-  private comet;
+  private quantumleap;
   private httpOptions;
 
   constructor(private http: HttpClient) {
     this.Endpoint = environment.ContextBroker;
     this.cygnus = environment.cygus;
-    this.comet = environment.sthComet;
+    this.quantumleap = environment.quantumleap;
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -24,9 +24,9 @@ export class ContextBrokerService {
     };
   }
 
-  getCometStatus() {
+  getQuantumleapStatus() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.comet + '/version').subscribe(response => {
+      this.http.get(this.quantumleap + '/version').subscribe(response => {
         resolve(response)
       }, error => reject(error));
     }) 
@@ -58,15 +58,21 @@ export class ContextBrokerService {
 
   getAll() {
     return new Promise((resolve, reject) => {
-      this.http.get(this.Endpoint + '/v2/entities').subscribe(response => {
+      this.http.get(this.Endpoint + '/v2/entities',this.httpOptions).subscribe(response => {
         resolve(response)
       }, error => reject(error));
     })
   }
 
   getById(id) {
+    let header = {
+      headers: new HttpHeaders({
+        'fiware-service': 'cattlechain',
+        'fiware-servicepath': '/CattleChainService'
+      })
+    };
     return new Promise((resolve, reject) => {
-      this.http.get(this.Endpoint + '/v2/entities/' + id + '?options-keyValues').subscribe(response => {
+      this.http.get(this.Endpoint + '/v2/entities/' + id + '?options=keyValues', header).subscribe(response => {
         resolve(response)
       }, error => {
         reject(error)
@@ -75,8 +81,14 @@ export class ContextBrokerService {
   }
 
   query(q) {
+    let header = {
+      headers: new HttpHeaders({
+        'fiware-service': 'cattlechain',
+        'fiware-servicepath': '/CattleChainService'
+      })
+    };
     return new Promise((resolve, reject) => {
-      this.http.get(this.Endpoint + '/v2/entities/' + q ).subscribe(response => {
+      this.http.get(this.Endpoint + '/v2/entities/' + q, header ).subscribe(response => {
         resolve(response)
       }, error => reject(error));
     })

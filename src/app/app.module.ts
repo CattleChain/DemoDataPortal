@@ -23,6 +23,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { OffChainDBComponent } from './components/off-chain-db/off-chain-db.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     MDBBootstrapModule.forRoot(),
   ],
-  providers: [MatDatepickerModule,MatNativeDateModule],
+  providers: [MatDatepickerModule,MatNativeDateModule, DatePipe],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [HomeComponent]
 })

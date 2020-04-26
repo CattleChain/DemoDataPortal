@@ -89,8 +89,15 @@ export class IoTAgentServiceService {
   }
 
   addEvent(deviceId, payload) {
+    let header = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Fiware-Service': 'cattlechain',
+        'Fiware-ServicePath': '/CattleChainService'
+      })
+    };
     return new Promise((resolve, reject) => {
-      this.http.post(this.agentEndpoint + '/json?k=4jggokgpepnvsb2uv4s40d59ov&i='+ deviceId, payload, this.httpOptions).subscribe(response => {
+      this.http.post(this.agentEndpoint + '/json?k=4jggokgpepnvsb2uv4s40d59ov&i='+ deviceId, payload, header).subscribe(response => {
         resolve(response)
       }, error => reject(error));
     })

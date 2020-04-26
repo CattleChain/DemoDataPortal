@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   iotAgentServiceGroup: IotAgentServiceGroup[];
   contextStatus : ContextStatus;
   cygnusStatus: CygnusStatus;
-  cometStatus : any;
+  quantumLeapStatus : any;
   sawtoothStatus: SawtoothRESTStatus;
   sawtoothExplorerStatus: any;
   count = 0;
@@ -37,8 +37,8 @@ export class DashboardComponent implements OnInit {
     this.context.getCygnusStatus().then((res) => {
       this.cygnusStatus = <CygnusStatus>res;
     })
-    this.context.getCometStatus().then((res) => {
-      this.cometStatus = res['version'];
+    this.context.getQuantumleapStatus().then((res) => {
+      this.quantumLeapStatus = res['version'];
     });
     this.sawtoothREST.getStatus().then((res) => {
       this.sawtoothStatus = <SawtoothRESTStatus>res;

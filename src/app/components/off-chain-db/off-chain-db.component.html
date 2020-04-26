@@ -1,37 +1,87 @@
 <div class="container-fluid">
+  <h1>Off Chain Data from Context Broker</h1>
     <div class="row">
-        <div class="col">
-            <h1>Show the Blockchain Data</h1>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <input matInput [(ngModel)]="type" placeholder="Type">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Asset (Animal Legal ID Number)</mat-label>
+          <input matInput [(ngModel)]="asset" placeholder="Asset">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="getData()">Get Data</button>
+        <button mat-raised-button color="warning" (click)="ngOnInit()">Reset</button>
+      </div >
+    </div>
+    <div class="row">
+        <div *ngIf="isData" class="col">
             <mat-form-field>
                 <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+                <input matInput (keyup)="applyFilter($event)" placeholder="data to be filter">
               </mat-form-field>
               
-              <div class="mat-elevation-z8">
+              <div>
                 <table mat-table [dataSource]="dataSource" matSort>
               
-                  <!-- ID Column -->
                   <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
                     <td mat-cell *matCellDef="let row"> {{row.id}} </td>
                   </ng-container>
               
-                  <!-- Progress Column -->
-                  <ng-container matColumnDef="progress">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                    <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                    <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                  </ng-container>
+   
+                  <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                    <td mat-cell *matCellDef="let row"> {{row.address}} </td>
                   </ng-container>
               
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                  <ng-container matColumnDef="asset">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Asset </th>
+                    <td mat-cell *matCellDef="let row"> {{row.asset}} </td>
                   </ng-container>
-              
-                  <!-- Color Column -->
-                  <ng-container matColumnDef="color">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+
+                  <ng-container matColumnDef="activityAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Activity Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.activityAlert}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="dairyAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dairy Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.dairyAlert}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="drinkingAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Drinking Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.drinkingAlert}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="resttimeAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rest Time Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.resttimeAlert}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="temratureAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Temprature Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.temratureAlert}} </td>
+                  </ng-container>
+                  
+                   <ng-container matColumnDef="weightAlert">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight Alert </th>
+                    <td mat-cell *matCellDef="let row"> {{row.weightAlert}} </td>
+                  </ng-container>
+
+                   <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="message">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>
+                    <td mat-cell *matCellDef="let row"> {{row.message}} </td>
                   </ng-container>
               
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

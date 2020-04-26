@@ -4,7 +4,7 @@ import { IoTAgentServiceService } from './iot-agent-service.service';
 import { TpClientService } from './cattlechain-tp-client.service';
 
 export class IotDataGenerator {
-  private intervalTime = interval(10000);
+  private intervalTime = interval(5000);
   deviceId;
   legalId;
   attributes:[];

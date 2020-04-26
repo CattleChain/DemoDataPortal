@@ -156,7 +156,8 @@
                 <br>
                 <input required [(ngModel)]="legalId"> <br>
                 <br>
-                <button mat-raised-button color="primary" (click)="attachGenerator(device.device_id, device.attributes)">Start and Attach Device</button>               
+                <button *ngIf="!isStarted" mat-raised-button color="primary" (click)="attachGenerator(device.device_id, device.attributes)">Start and Attach Device</button> 
+                <h3 *ngIf="isStarted">Device has been attached</h3>             
             </mat-card-content>
         </mat-card>
         </div>
