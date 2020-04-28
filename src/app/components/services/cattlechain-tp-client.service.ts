@@ -26,6 +26,17 @@ export class TpClientService {
     }) 
   }
 
+  createAccount(legalId) {
+    let body = {
+      "legalId" : legalId
+    }
+    return new Promise((resolve, reject) => {
+      this.http.post(this.tpClient + '/account', body, this.httpOptions).subscribe(response => {
+        resolve(response)
+      }, error => reject(error));
+    }) 
+  }
+
   createAnimalIdentity(body) {
     return new Promise((resolve, reject) => {
       this.http.post(this.tpClient + '/create', body, this.httpOptions).subscribe(response => {

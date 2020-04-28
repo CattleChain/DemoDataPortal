@@ -13,6 +13,32 @@ curl --location --request POST 'http://localhost:1026/v2/subscriptions/' \
   "subject": {
     "entities": [
       {
+        "idPattern": "Device.*"
+      }
+    ],
+     "condition": {
+      "attrs": [ "activity","temprature","weight","drinkingbehaviour","rest_time","dairy_time" ]
+    }
+  },
+  "notification": {
+    "http": {
+      "url": "http://quantumleap:8668/v2/notify"
+    }
+  }
+}'
+echo 'quantumleap subscription added !!!!'
+
+echo 'adding quantumleap subscription.....'
+curl --location --request POST 'http://localhost:1026/v2/subscriptions/' \
+--header 'content-type: application/json' \
+--header 'fiware-service: cattlechain' \
+--header 'fiware-servicepath: /CattleChainService' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "description": "Notify to quantumleap",
+  "subject": {
+    "entities": [
+      {
         "idPattern": "Event.*"
       }
     ],

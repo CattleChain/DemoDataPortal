@@ -25,6 +25,7 @@ export class AnimalCURDComponent implements OnInit {
   displayedColumns: string[] = ['id', 'legalId', 'species'];
   dataSource: any;
   template: String;
+  publicAddress: String;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -119,10 +120,14 @@ export class AnimalCURDComponent implements OnInit {
       "welfareCondition": this.createAnimalIdentity.value.welfareCondition,
       "location": { "type": "point", "coordinates": [this.createAnimalIdentity.value.latitude, this.createAnimalIdentity.value.longitude]}
     };
-
-    this.tpClient.createAnimalIdentity(tpClientBody).then((res) => {
+    this.tpClient.createAccount(this.createAnimalIdentity.value.legalId).then((res) => {
+      console.log('response', JSON.stringify(res));
+      this.publicAddress = res['account'];
+      return this.tpClient.createAnimalIdentity(tpClientBody);
+    }).then((res) => {
       console.log(res['success']['link']);
       body['batchId'] = {value: res['success']['link'].toString().replace('http://rest-api:8008/batch_statuses?id=', '')}
+      body['publicAddress'] = {value: this.publicAddress};
       return this.contextService.create(body);
     }).then((res) => {
       console.log('res', res);
