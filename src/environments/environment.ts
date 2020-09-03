@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   IOTAgentJSON: "http://localhost:4041/iot",
   IOTAgentProvison : "http://localhost:7896/iot",
-  ContextBroker: "http://localhost:1026",
-  cygus: "http://localhost:5080",
+  ContextBroker: "http://46.17.108.38:1026",
+  cygus: "http://46.17.108.38:5080",
   quantumleap: "http://localhost:8668",
-  sawtoothREST: "http://localhost:8008",
-  sawtoothExplorer: "http://localhost:4100",
-  tpClient: "http://localhost:3000",
+  sawtoothREST: "http://46.17.108.38:8008",
+  sawtoothExplorer: "http://46.17.108.59:8091",
+  tpClient: "http://46.17.108.38:3000",
 };
 
 /*

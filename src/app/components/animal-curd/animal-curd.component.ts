@@ -92,7 +92,7 @@ export class AnimalCURDComponent implements OnInit {
       breed: { value: this.createAnimalIdentity.value.breed },
       calvedBy: { type: 'Relationship', value: this.createAnimalIdentity.value.calvedBy },
       siredBy: { type: 'Relationship', value: this.createAnimalIdentity.value.siredBy },
-      location: { type: 'geo:json', value: { type: 'Point', coordinates: [parseFloat(this.createAnimalIdentity.value.latitude), parseFloat(this.createAnimalIdentity.value.longitude)] } },
+      location: { type: 'geo:json', value: { type: 'Point', coordinates: [parseFloat(this.createAnimalIdentity.value.latitude) ? parseFloat(this.createAnimalIdentity.value.latitude): 10.00 , parseFloat(this.createAnimalIdentity.value.longitude) ? parseFloat(this.createAnimalIdentity.value.longitude) : 20.00] } },
       weight: { value: this.createAnimalIdentity.value.weight },
       ownedBy: { type: 'Relationship', value: this.createAnimalIdentity.value.ownedBy },
       phenologicalCondition: { value: this.createAnimalIdentity.value.phenologicalCondition },
@@ -102,34 +102,42 @@ export class AnimalCURDComponent implements OnInit {
       welfareCondition: { value: this.createAnimalIdentity.value.welfareCondition }
     };
 
-    let tpClientBody = {
-      "id": this.createAnimalIdentity.value.id,
-      "type": this.createAnimalIdentity.value.type,
-      "breed": this.createAnimalIdentity.value.breed,
-      "sex": this.createAnimalIdentity.value.sex,
-      "legalId": this.createAnimalIdentity.value.legalId,
-      "species": this.createAnimalIdentity.value.species,
-      "birthdate": this.createAnimalIdentity.value.birthdate,
-      "calvedBy": this.createAnimalIdentity.value.calvedBy,
-      "siredBy": this.createAnimalIdentity.value.siredBy,
-      "weight": this.createAnimalIdentity.value.weight,
-      "ownedBy": this.createAnimalIdentity.value.ownedBy,
-      "phenologicalCondition": this.createAnimalIdentity.value.phenologicalCondition,
-      "healthCondition": this.createAnimalIdentity.value.healthCondition,
-      "fedWith": this.createAnimalIdentity.value.fedWith,
-      "welfareCondition": this.createAnimalIdentity.value.welfareCondition,
-      "location": { "type": "point", "coordinates": [this.createAnimalIdentity.value.latitude, this.createAnimalIdentity.value.longitude]}
-    };
-    this.tpClient.createAccount(this.createAnimalIdentity.value.legalId).then((res) => {
-      console.log('response', JSON.stringify(res));
-      this.publicAddress = res['account'];
-      return this.tpClient.createAnimalIdentity(tpClientBody);
-    }).then((res) => {
-      console.log(res['success']['link']);
-      body['batchId'] = {value: res['success']['link'].toString().replace('http://rest-api:8008/batch_statuses?id=', '')}
-      body['publicAddress'] = {value: this.publicAddress};
-      return this.contextService.create(body);
-    }).then((res) => {
+    // let tpClientBody = {
+    //   "id": this.createAnimalIdentity.value.id,
+    //   "type": this.createAnimalIdentity.value.type,
+    //   "breed": this.createAnimalIdentity.value.breed,
+    //   "sex": this.createAnimalIdentity.value.sex,
+    //   "legalId": this.createAnimalIdentity.value.legalId,
+    //   "species": this.createAnimalIdentity.value.species,
+    //   "birthdate": this.createAnimalIdentity.value.birthdate,
+    //   "calvedBy": this.createAnimalIdentity.value.calvedBy,
+    //   "siredBy": this.createAnimalIdentity.value.siredBy,
+    //   "weight": this.createAnimalIdentity.value.weight,
+    //   "ownedBy": this.createAnimalIdentity.value.ownedBy,
+    //   "phenologicalCondition": this.createAnimalIdentity.value.phenologicalCondition,
+    //   "healthCondition": this.createAnimalIdentity.value.healthCondition,
+    //   "fedWith": this.createAnimalIdentity.value.fedWith,
+    //   "welfareCondition": this.createAnimalIdentity.value.welfareCondition,
+    //   "location": { "type": "point", "coordinates": [this.createAnimalIdentity.value.latitude, this.createAnimalIdentity.value.longitude]}
+    // };
+    // this.tpClient.createAccount(this.createAnimalIdentity.value.legalId).then((res) => {
+    //   console.log('response', JSON.stringify(res));
+    //   this.publicAddress = res['account'];
+    //   return this.tpClient.createAnimalIdentity(tpClientBody);
+    // }).then((res) => {
+    //   console.log(res['success']['link']);
+    //   body['batchId'] = {value: res['success']['link'].toString().replace('http://rest-api:8008/batch_statuses?id=', '')}
+    //   body['publicAddress'] = {value: this.publicAddress};
+    //   return this.contextService.create(body);
+    // }).then((res) => {
+    //   console.log('res', res);
+    //   alert('animal created');
+    //   this.ngOnInit();
+    // }).catch((error) => {
+    //   alert('Error : ' + JSON.stringify(error));
+    // })
+
+     this.contextService.create(body).then((res) => {
       console.log('res', res);
       alert('animal created');
       this.ngOnInit();

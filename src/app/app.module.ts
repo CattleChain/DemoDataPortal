@@ -12,15 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AnimalCURDComponent } from './components/animal-curd/animal-curd.component';
-import { FarmCURDComponent } from './components/farm-curd/farm-curd.component';
-import { LiveStockCURDComponent } from './components/live-stock-curd/live-stock-curd.component';
-import { LiveStockEventsComponent } from './components/live-stock-events/live-stock-events.component';
-import { SupplyChainComponent } from './components/supply-chain/supply-chain.component';
+// import { FarmCURDComponent } from './components/farm-curd/farm-curd.component';
+// import { LiveStockCURDComponent } from './components/live-stock-curd/live-stock-curd.component';
+// import { LiveStockEventsComponent } from './components/live-stock-events/live-stock-events.component';
+// import { SupplyChainComponent } from './components/supply-chain/supply-chain.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { OffChainDBComponent } from './components/off-chain-db/off-chain-db.component';
+// import { OffChainDBComponent } from './components/off-chain-db/off-chain-db.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
@@ -31,11 +31,11 @@ import { DatePipe } from '@angular/common';
     HomeComponent,
     DashboardComponent,
     AnimalCURDComponent,
-    FarmCURDComponent,
-    LiveStockCURDComponent,
-    LiveStockEventsComponent,
-    SupplyChainComponent,
-    OffChainDBComponent,
+    // FarmCURDComponent,
+    // LiveStockCURDComponent,
+    // LiveStockEventsComponent,
+    // SupplyChainComponent,
+    // OffChainDBComponent,
     SubscriptionsComponent
   ],
   imports: [

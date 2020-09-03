@@ -24,22 +24,22 @@ export class DashboardComponent implements OnInit {
   tpClientStatus: any;
 
   ngOnInit(): void {
-    this.iotAgent.getIotAgentStatus().then((res) => {
-      this.iotAgentStatus = <IotAgentStatus>res;
-    });
-    this.iotAgent.getIotAgentSevice().then((res) => {
-      this.iotAgentServiceGroup = <IotAgentServiceGroup[]>res['services'];
-      this.count = this.iotAgentServiceGroup.length;
-    });
+    // this.iotAgent.getIotAgentStatus().then((res) => {
+    //   this.iotAgentStatus = <IotAgentStatus>res;
+    // });
+    // this.iotAgent.getIotAgentSevice().then((res) => {
+    //   this.iotAgentServiceGroup = <IotAgentServiceGroup[]>res['services'];
+    //   this.count = this.iotAgentServiceGroup.length;
+    // });
     this.context.status().then((res) => {
       this.contextStatus = <ContextStatus>res['orion'];
     })
     this.context.getCygnusStatus().then((res) => {
       this.cygnusStatus = <CygnusStatus>res;
     })
-    this.context.getQuantumleapStatus().then((res) => {
-      this.quantumLeapStatus = res['version'];
-    });
+    // this.context.getQuantumleapStatus().then((res) => {
+    //   this.quantumLeapStatus = res['version'];
+    // });
     this.sawtoothREST.getStatus().then((res) => {
       this.sawtoothStatus = <SawtoothRESTStatus>res;
     });
@@ -51,23 +51,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  createService() {
-    let payload = {
-      "services": [
-        {
-          "apikey": "4jggokgpepnvsb2uv4s40d59ov",
-          "cbroker": "http://orion:1026",
-          "entity_type": "Thing",
-          "resource": "/iot/json"
-        }
-      ]
-    };
-    this.iotAgent.addIotAgentService(payload).then((res) => {
-      alert('service created');
-      this.ngOnInit();
-    })
+  // createService() {
+  //   let payload = {
+  //     "services": [
+  //       {
+  //         "apikey": "4jggokgpepnvsb2uv4s40d59ov",
+  //         "cbroker": "http://orion:1026",
+  //         "entity_type": "Thing",
+  //         "resource": "/iot/json"
+  //       }
+  //     ]
+  //   };
+  //   this.iotAgent.addIotAgentService(payload).then((res) => {
+  //     alert('service created');
+  //     this.ngOnInit();
+  //   })
 
-  }
+  // }
 }
 
 
